@@ -1,0 +1,31 @@
+{
+  "eventType": "ORDER_CREATED",
+  "orderId": "12345",
+  "customerId": "CUST-67890",
+  "customerAddress": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "street": "Main Street",
+    "houseNumber": "10A",
+    "postCode": "12345",
+    "city": "Berlin"
+  },
+  "paymentId": "PAY-98765",
+  "shipmentId": "SHIP-54321",
+  "totalPrice": 199.99,
+  "status": "CONFIRMED",
+  "timestamp": "2025-02-15T12:34:56.789Z",
+  "createDate": "2025-02-15T12:34:56.789",
+  "items": [
+    {
+      "id": "ITEM-1",
+      "quantity": 2,
+      "price": 49.99
+    },
+    {
+      "id": "ITEM-2",
+      "quantity": 1,
+      "price": 99.99
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+spring:
+  application.name: payments
+
+  event:
+    publisher:
+      ordersSns: "orders-sns.fifo"
+      inventorySns: "inventory-sns.fifo"
+
+aws-resources:
+  ordersTopicPaymentsServiceSqs: orders_topic_payment_service
+
+---
+spring:
+  config:
+    activate:
+      on-profile: ["docker"]
+  cloud:
+    aws:
+      endpoint: "http://localstack:4566"
+aws-resources:
+  ordersTopicPaymentsServiceSqs: "http://sqs.eu-central-1.localhost.localstack.cloud:4566/000000000000/orders_topic_payment_service.fifo"

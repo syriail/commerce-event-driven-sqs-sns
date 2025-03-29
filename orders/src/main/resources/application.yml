@@ -1,0 +1,49 @@
+spring:
+  application.name: orders
+
+  db:
+    name: "orders"
+    host: localhost
+    username: postgres
+    password: password
+
+  datasource:
+    url: "jdbc:postgresql://${spring.db.host}:5432/${spring.db.name}"
+    username: ${spring.db.username}
+    password: ${spring.db.password}
+  sql:
+    init:
+      platform: postgresql
+
+  flyway:
+    enabled: true
+    url: "jdbc:postgresql://${spring.db.host}:5432/${spring.db.name}"
+    user: ${spring.db.username}
+    password: ${spring.db.password}
+
+  event:
+    publisher:
+      ordersSns: "orders-sns.fifo"
+      inventorySns: "inventory-sns.fifo"
+
+aws-resources:
+  ordersTopicOrdersServiceSqs: orders_topic_orders_service.fifo
+
+---
+spring:
+  config:
+    activate:
+      on-profile: ["test"]
+  flyway:
+    enabled: false
+
+---
+spring:
+  config:
+   activate:
+     on-profile: ["docker"]
+  cloud:
+    aws:
+      endpoint: "http://localstack:4566"
+aws-resources:
+  ordersTopicOrdersServiceSqs: "http://sqs.eu-central-1.localhost.localstack.cloud:4566/000000000000/orders_topic_orders_service.fifo"
