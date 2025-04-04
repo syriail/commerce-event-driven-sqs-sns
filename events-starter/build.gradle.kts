@@ -90,7 +90,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/syriail/your-repository")
+            url = uri("https://maven.pkg.github.com/syriail/commerce-event-driven-sqs-sns")
             credentials {
                 username = System.getenv("GITHUB_USERNAME")
                 password = System.getenv("GITHUB_TOKEN")

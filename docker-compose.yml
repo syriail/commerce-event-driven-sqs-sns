@@ -30,41 +30,41 @@ services:
     depends_on:
       - localstack
 
-  inventory:
-    container_name: inventory
-    environment:
-      - DB_HOST=commerce-db
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=password
-      - SPRING_PROFILES_ACTIVE=docker
-    build:
-      context: ./inventory
-      dockerfile: Dockerfile
-    expose:
-      - "8080"
-    ports:
-      - "8001:8080"
-    depends_on:
-      - database
-      - aws-resources-setup
+  # inventory:
+  #   container_name: inventory
+  #   environment:
+  #     - DB_HOST=commerce-db
+  #     - DB_USERNAME=postgres
+  #     - DB_PASSWORD=password
+  #     - SPRING_PROFILES_ACTIVE=docker
+  #   build:
+  #     context: ./inventory
+  #     dockerfile: Dockerfile
+  #   expose:
+  #     - "8080"
+  #   ports:
+  #     - "8001:8080"
+  #   depends_on:
+  #     - database
+  #     - aws-resources-setup
 
-  orders:
-    container_name: orders
-    environment:
-      - DB_HOST=commerce-db
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=password
-      - SPRING_PROFILES_ACTIVE=docker
-    build:
-      context: ./orders
-      dockerfile: Dockerfile
-    expose:
-      - "8080"
-    ports:
-      - "8003:8080"
-    depends_on:
-      - database
-      - aws-resources-setup
+  # orders:
+  #   container_name: orders
+  #   environment:
+  #     - DB_HOST=commerce-db
+  #     - DB_USERNAME=postgres
+  #     - DB_PASSWORD=password
+  #     - SPRING_PROFILES_ACTIVE=docker
+  #   build:
+  #     context: ./orders
+  #     dockerfile: Dockerfile
+  #   expose:
+  #     - "8080"
+  #   ports:
+  #     - "8003:8080"
+  #   depends_on:
+  #     - database
+  #     - aws-resources-setup
 
   payments:
     container_name: payments
@@ -80,37 +80,37 @@ services:
     depends_on:
       - aws-resources-setup
 
-  checkout:
-    container_name: checkout
-    environment:
-      - INVENTORY_SERVICE_BASE_URL=http://inventory:8080
-      - ORDER_SERVICE_BASE_URL=http://orders:8080
-      - SPRING_PROFILES_ACTIVE=docker
-    build:
-      context: ./checkout
-      dockerfile: Dockerfile
-    expose:
-      - "8080"
-    ports:
-      - "8000:8080"
-    depends_on:
-      - inventory
-      - orders
+  # checkout:
+  #   container_name: checkout
+  #   environment:
+  #     - INVENTORY_SERVICE_BASE_URL=http://inventory:8080
+  #     - ORDER_SERVICE_BASE_URL=http://orders:8080
+  #     - SPRING_PROFILES_ACTIVE=docker
+  #   build:
+  #     context: ./checkout
+  #     dockerfile: Dockerfile
+  #   expose:
+  #     - "8080"
+  #   ports:
+  #     - "8000:8080"
+  #   depends_on:
+  #     - inventory
+  #     - orders
 
-  test-data-setup:
-    container_name: test-data-setup
-    image: postgres:15
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-    volumes:
-      - ./scripts/test-data:/test-data
-      - ./scripts/wait-for-it.sh:/wait-for-it.sh
-    entrypoint:
-      [
-        "/bin/sh",
-        "-c",
-        "/wait-for-it.sh tcp://checkout:8080 -- psql postgresql://postgres:password@commerce-db:5432/inventory -f /test-data/inventory-test-data.sql && psql postgresql://postgres:password@commerce-db:5432/orders -f /test-data/orders-test-data.sql",
-      ]
-    depends_on:
-      - checkout
+  # test-data-setup:
+  #   container_name: test-data-setup
+  #   image: postgres:15
+  #   environment:
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=password
+  #   volumes:
+  #     - ./scripts/test-data:/test-data
+  #     - ./scripts/wait-for-it.sh:/wait-for-it.sh
+  #   entrypoint:
+  #     [
+  #       "/bin/sh",
+  #       "-c",
+  #       "/wait-for-it.sh tcp://checkout:8080 -- psql postgresql://postgres:password@commerce-db:5432/inventory -f /test-data/inventory-test-data.sql && psql postgresql://postgres:password@commerce-db:5432/orders -f /test-data/orders-test-data.sql",
+  #     ]
+  #   depends_on:
+  #     - checkout

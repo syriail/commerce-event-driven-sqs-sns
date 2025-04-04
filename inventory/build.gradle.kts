@@ -22,7 +22,9 @@ java {
 group = "com.ghrer.commerce"
 
 repositories {
-    mavenLocal()
+    maven {
+        url = uri("https://maven.pkg.github.com/syriail/commerce-event-driven-sqs-sns")
+    }
     mavenCentral()
 }
 
