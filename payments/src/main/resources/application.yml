@@ -7,7 +7,7 @@ spring:
       inventorySns: "inventory-sns.fifo"
 
 aws-resources:
-  ordersTopicPaymentsServiceSqs: orders_topic_payment_service
+  ordersTopicPaymentsServiceSqs: orders_topic_payment_service.fifo
 
 ---
 spring:

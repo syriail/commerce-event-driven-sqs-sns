@@ -9,6 +9,7 @@ services:
       - POSTGRES_PASSWORD=password
     volumes:
       - ./scripts/init-db:/docker-entrypoint-initdb.d
+      - "~/.m2:/home/gradleuser/.m2"
 
   localstack:
     container_name: localstack
@@ -48,23 +49,23 @@ services:
   #     - database
   #     - aws-resources-setup
 
-  # orders:
-  #   container_name: orders
-  #   environment:
-  #     - DB_HOST=commerce-db
-  #     - DB_USERNAME=postgres
-  #     - DB_PASSWORD=password
-  #     - SPRING_PROFILES_ACTIVE=docker
-  #   build:
-  #     context: ./orders
-  #     dockerfile: Dockerfile
-  #   expose:
-  #     - "8080"
-  #   ports:
-  #     - "8003:8080"
-  #   depends_on:
-  #     - database
-  #     - aws-resources-setup
+  orders:
+    container_name: orders
+    environment:
+      - DB_HOST=commerce-db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
+      - SPRING_PROFILES_ACTIVE=docker
+    build:
+      context: ./orders
+      dockerfile: Dockerfile
+    expose:
+      - "8080"
+    ports:
+      - "8003:8080"
+    depends_on:
+      - database
+      - aws-resources-setup
 
   payments:
     container_name: payments

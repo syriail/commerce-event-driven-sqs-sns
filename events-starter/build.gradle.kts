@@ -80,27 +80,13 @@ tasks.test {
 
 publishing {
     publications {
-        create<MavenPublication>("gpr") {
-            groupId = "com.ghrer.commerce"
+        create<MavenPublication>("mavenJava") {
             artifactId = "events-starter"
-            version = "1.0.0"
             from(components["java"])
         }
     }
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/syriail/commerce-event-driven-sqs-sns")
-            credentials {
-                username = System.getenv("GITHUB_USERNAME")
-                password = System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
     // Publishing to a local Maven repo:
-//    repositories {
-//        maven {
-//            url = uri("$projectDir/repo")
-//        }
-//    }
+    repositories {
+        mavenLocal()
+    }
 }
