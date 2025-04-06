@@ -13,8 +13,6 @@ echo "Creating SNS topics"
 
 aws sns create-topic --endpoint-url=http://localstack:4566 --name orders-sns.fifo --attributes "FifoTopic=true,ContentBasedDeduplication=true"
 
-# arn:aws:sns:eu-central-1:000000000000:orders-sns.fifo
-
 echo "Creating SQS"
 
 aws sqs create-queue --endpoint-url=http://localstack:4566 --queue-name orders_topic_orders_service.fifo --attributes "FifoQueue=true,ContentBasedDeduplication=true"
@@ -46,4 +44,5 @@ aws --endpoint-url=http://localstack:4566 sns subscribe \
     --notification-endpoint arn:aws:sqs:eu-central-1:000000000000:orders_topic_inventory_service.fifo \
     --attributes '{"RawMessageDelivery":"true","FilterPolicy":"{\"eventType\":[\"ORDER_CREATED\"]}"}'
     
-
+echo "AWS resources are created"
+exit 0

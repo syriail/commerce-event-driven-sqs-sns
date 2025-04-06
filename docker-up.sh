@@ -18,7 +18,7 @@ cleanup_local_repos() {
 
 echo "Building and publishing events-starter..."
 
-if ./events-starter/gradlew --project-dir=events-starter --full-stacktrace clean build publish; then
+if ./events-starter/gradlew --project-dir=events-starter --full-stacktrace clean assemble publish; then
 
     create_local_repos
     echo "🐳 Building and starting Docker containers ..."

@@ -56,8 +56,8 @@ dependencies {
     implementation("io.hypersistence:hypersistence-utils-hibernate-62:3.8.0")
 
 //    AWS
-    implementation("io.awspring.cloud:spring-cloud-aws-starter")
-    implementation("io.awspring.cloud:spring-cloud-aws-starter-sqs")
+//    implementation("io.awspring.cloud:spring-cloud-aws-starter")
+//    implementation("io.awspring.cloud:spring-cloud-aws-starter-sqs")
 
 //    Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")

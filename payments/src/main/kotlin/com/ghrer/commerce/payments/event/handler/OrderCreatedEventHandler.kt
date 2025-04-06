@@ -6,6 +6,7 @@ import com.ghrer.commerce.payments.business.Address
 import com.ghrer.commerce.payments.business.Item
 import com.ghrer.commerce.payments.business.PaymentProcessor
 import com.ghrer.commerce.payments.business.ProcessPaymentRequest
+import mu.KotlinLogging
 import org.springframework.stereotype.Service
 import kotlin.reflect.KClass
 
@@ -13,7 +14,11 @@ import kotlin.reflect.KClass
 class OrderCreatedEventHandler(
     private val paymentProcessor: PaymentProcessor
 ) : EventHandler {
+
+    private val logger = KotlinLogging.logger { }
+
     override fun handleEvent(event: CommerceEvent) {
+        logger.info { "Handle OrderCreatedEvent: $event" }
         val orderCreatedEvent = event as OrderCreatedEvent
         paymentProcessor.processPayment(
             mapToProcessEventRequest(orderCreatedEvent)
