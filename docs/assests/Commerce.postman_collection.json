@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "a096c15d-e0fd-4e9e-ab08-2d5d0bec9afc",
+		"name": "Commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "3027912"
+	},
+	"item": [
+		{
+			"name": "Checkout-Place order - Payment success",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"testing@example.com\",\n    \"items\": [\n        {\n            \"id\": \"abd03521-6fa7-4b2f-9190-2dfa3f13cdcf\",\n            \"quantity\": 2,\n            \"price\": 2.4\n        },\n        {\n            \"id\": \"480476a9-c5f4-41f7-96f9-0fd3b7afb748\",\n            \"quantity\": 3,\n            \"price\": 6.3\n\n        },\n        {\n            \"id\": \"3779f652-34c1-42de-8f35-a8b605c98569\",\n            \"quantity\": 4,\n            \"price\": 5.2\n        }\n    ],\n    \"totalPrice\": 13.9,\n    \"customerAddress\": {\n        \"firstName\": \"Hussein\",\n        \"lastName\": \"Ghrer\",\n        \"street\": \"Nice street\",\n        \"houseNumber\": \"1\",\n        \"postCode\": \"111\",\n        \"city\": \"Nice City\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8003/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "Add items to cart",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": \"abd03521-6fa7-4b2f-9190-2dfa3f13cdcf\",\n        \"quantity\": 2\n    },\n    {\n        \"id\": \"480476a9-c5f4-41f7-96f9-0fd3b7afb748\",\n        \"quantity\": 3\n    },\n    {\n        \"id\": \"3779f652-34c1-42de-8f35-a8b605c98569\",\n        \"quantity\": 4\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8001/reserve"
+			},
+			"response": []
+		},
+		{
+			"name": "Checkout-Place order - Payment declined",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"decline@example.com\",\n    \"items\": [\n        {\n            \"id\": \"abd03521-6fa7-4b2f-9190-2dfa3f13cdcf\",\n            \"quantity\": 2,\n            \"price\": 2.4\n        },\n        {\n            \"id\": \"480476a9-c5f4-41f7-96f9-0fd3b7afb748\",\n            \"quantity\": 3,\n            \"price\": 6.3\n\n        },\n        {\n            \"id\": \"3779f652-34c1-42de-8f35-a8b605c98569\",\n            \"quantity\": 4,\n            \"price\": 5.2\n        }\n    ],\n    \"totalPrice\": 13.9,\n    \"customerAddress\": {\n        \"firstName\": \"Hussein\",\n        \"lastName\": \"Ghrer\",\n        \"street\": \"Nice street\",\n        \"houseNumber\": \"1\",\n        \"postCode\": \"111\",\n        \"city\": \"Nice City\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8003/orders"
+			},
+			"response": []
+		}
+	]
+}
